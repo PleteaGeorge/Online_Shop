@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/javascript/cart.js"></script>
+    <link rel="stylesheet" href ="/Css/cart-style.css">
+</head>
+<body>
+<div style="background-color: beige" th:insert="fragments/menu :: navbar"></div>
+<div class="container">
+    <div th:each="productDto : ${productDtos}">
+        <div class="product">
+            <img th:src="${productDto.imagePath}"  class="product-img">
+            <div class="product-info">
+                <div>
+                    <span class="product-name" th:text="${productDto.name}"></span>
+                    <br>
+                    <span class="product-price" th:text="${productDto.price}+'RON'"></span>
+                </div>
+            </div>
+            <div class="product-actions">
+                <button th:onclick="'remove(\'' + ${productDto.id} + '\')'" class="btn-remove" id="remove">Sterge</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="total" >
+        <span>Total in lei:</span>
+        <span id="total"></span>
+        <button class="btn-buy" onclick="buy()">Cumpara</button>
+    </div>
+</div>
+</body>
+</html>
